@@ -1,5 +1,5 @@
 ﻿更新日志：
-GTASuperESCv7.9
+GTASuperESCv7.9   2019/01/01
 修复 无NAT回环时自动创建的内网房间号错误
 
 GTASuperESCv7.8   2018/12/30
