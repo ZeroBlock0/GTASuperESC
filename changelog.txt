@@ -1,5 +1,5 @@
 ﻿更新日志：
-GTASuperESCv8.0
+GTASuperESCv8.0   2019/01/07
 修复 UPnP(2)在路由端口大于32767时无法创建
 修改 部分提示
 
