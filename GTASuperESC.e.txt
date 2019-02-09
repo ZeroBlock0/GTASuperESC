@@ -26,7 +26,7 @@
 
 .子程序 __启动窗口_创建完毕
 
-当前版本 ＝ 81
+当前版本 ＝ 82
 保存周期 ＝ 2000
 心跳包周期 ＝ 5000
 
@@ -138,7 +138,7 @@ GetProcessImageFileNameA (hp, name, 260)
         .否则
             调试输出 (“延迟访问失败”, 延迟访问结果)
         .如果结束
-
+        调试输出 (全WS服务器 [已次数].节点间延迟地址, 全WS服务器 [已次数].服务端延迟, 延迟访问结果)
     .如果真结束
 
 .计次循环尾 ()
@@ -958,6 +958,7 @@ _启动窗口.标题 ＝ “GTASuperESCv” ＋ 到文本 (当前版本 ÷ 10) �
         输出文本 (#换行符 ＋ “Unable to get internet IP address, can't create server automatically, please confirm if you are connected to the internet”)
     .如果结束
     是否检测中 ＝ 假
+    联机执行中 ＝ 假
     返回 ()
 .如果真结束
 .计次循环首 (测试次数, 已次数)
@@ -1324,7 +1325,6 @@ _启动窗口.标题 ＝ “GTASuperESCv” ＋ 到文本 (当前版本 ÷ 10) �
                 输出文本 (“ ，也可以按照以下教程使用免费内网穿透来手动创建：”, 假, 真)
                 输出文本 (“ https://wgzeyu.gtxcn.com/GTASuperESC/video.mp4”, 假, 真)
                 输出文本 (“ https://www.bilibili.com/video/av28899499/?p=2”, 假, 真)
-                输出文本 (“ 推荐度：自动创建>手动国内服>一键创建>手动国外服”, 假, 真)
                 输出文本 (“ 若只需局域网联机,点一下手动创建可一创建内网房间”, 假, 真)
                 ' 载入 (窗口1, _启动窗口, 真)  ' 之前那个改信息框按钮标题的竟然只在调试时有效。。
             .否则
@@ -1368,6 +1368,7 @@ _启动窗口.标题 ＝ “GTASuperESCv” ＋ 到文本 (当前版本 ÷ 10) �
 
 .计次循环尾 ()
 启动线程 (&延迟恢复检测状态, , )
+联机执行中 ＝ 假
 
 .子程序 替换IP, 文本型
 .参数 目标IP, 文本型
@@ -2062,7 +2063,17 @@ UPnP创建结果 ＝ 100
 
 .子程序 _按钮1_被单击
 
+.如果真 (联机执行中)
+    .如果 (是否中文系统)
+        输出文本 (#错误点阵, 假, 真)
+        输出文本 (“错误：无法在正在执行联机(正在加入/创建房间)的同时重复执行联机，请等待当前联机操作执行结束后再操作！”, 真, 真)
+    .否则
+        输出文本 (“Error: The online function cannot be executed while the online related function is being executed. Please wait for the current online operation to complete before proceeding!”, 真, 真)
+    .如果结束
+    返回 ()
+.如果真结束
 按钮1.禁止 ＝ 真
+联机执行中 ＝ 真
 等待服务器获取结果 ()
 输出文本 (“ ”, 假, 真)
 启动线程 (&检测创建支持, , 测试句柄)
@@ -2377,7 +2388,18 @@ UDP数据报.关闭 ()
     .如果结束
     返回 ()
 .如果真结束
+.如果真 (联机执行中)
+    .如果 (是否中文系统)
+        输出文本 (#错误点阵, 假, 真)
+        输出文本 (“错误：无法在正在执行联机(正在加入/创建房间)的同时重复执行联机，请等待当前联机操作执行结束后再操作！”, 真, 真)
+    .否则
+        输出文本 (“Error: The online function cannot be executed while the online related function is being executed. Please wait for the current online operation to complete before proceeding!”, 真, 真)
+    .如果结束
+    返回 ()
+.如果真结束
+
 按钮12.禁止 ＝ 真
+联机执行中 ＝ 真
 等待服务器获取结果 ()
 输出文本 (“开始生成随机密码，若此时卡死请向作者反馈，重新打开软件后点提交反馈按钮，最好写上你的系统版本，系统怎么安装的，比如是不是GHOST精简版之类的，是不是在网吧运行，然后提供卡死时的截图”, 真, 真)
 处理事件 ()
@@ -2442,12 +2464,23 @@ UDP数据报.关闭 ()
     .如果结束
     按钮12.禁止 ＝ 假
 .如果结束
-
+联机执行中 ＝ 假
 
 .子程序 _按钮4_被单击
 .局部变量 内网房间号, 文本型
 .局部变量 本机房间号, 文本型
 
+.如果真 (联机执行中)
+    .如果 (是否中文系统)
+        输出文本 (#错误点阵, 假, 真)
+        输出文本 (“错误：无法在正在执行联机(正在加入/创建房间)的同时重复执行联机，请等待当前联机操作执行结束后再操作！”, 真, 真)
+    .否则
+        输出文本 (“Error: The online function cannot be executed while the online related function is being executed. Please wait for the current online operation to complete before proceeding!”, 真, 真)
+    .如果结束
+    返回 ()
+.如果真结束
+
+联机执行中 ＝ 真
 .如果真 (到整数 (编辑框3.内容) ＜ 1 或 到整数 (编辑框3.内容) ＞ 65535)
     置随机数种子 ()
     编辑框3.内容 ＝ 到文本 (取随机数 (10000, 32767))
@@ -2534,7 +2567,7 @@ UDP数据报_创建 (使用端口)
 UDP超时检测.时钟周期 ＝ 1000
 连接后禁止各种组件 ()
 ' 选择框4.禁止 ＝ 真
-
+联机执行中 ＝ 假
 
 .子程序 新收到数据
 .参数 收到的数据, 字节集
@@ -3197,6 +3230,8 @@ MD5a ＝ 校验_取md5 (到字节集 (内容), 真)
 .否则
     .如果 (是否中文系统)
         输出文本 (“服务器连接失败”, 真, 真)
+        输出文本 (“(连接房主运行的本软件失败,可能是网络问题,也可能是”, 假, 真)
+        输出文本 (“对方已关闭软件.若已关闭则需重新创建,连接新房间号)”, 假, 真)
     .否则
         输出文本 (“Server connection failed”, 真, 真)
     .如果结束
@@ -3390,6 +3425,16 @@ MD5a ＝ 校验_取md5 (到字节集 (内容), 真)
     .如果结束
     返回 ()
 .如果真结束
+.如果真 (联机执行中)
+    .如果 (是否中文系统)
+        输出文本 (#错误点阵, 假, 真)
+        输出文本 (“错误：无法在正在执行联机(正在加入/创建房间)的同时重复执行联机，请等待当前联机操作执行结束后再操作！”, 真, 真)
+    .否则
+        输出文本 (“Error: The online function cannot be executed while the online related function is being executed. Please wait for the current online operation to complete before proceeding!”, 真, 真)
+    .如果结束
+    返回 ()
+.如果真结束
+
 按钮2.禁止 ＝ 真
 按钮_加入房间_禁止 ＝ 按钮2.禁止
 等待服务器获取结果 ()
@@ -3404,6 +3449,9 @@ MD5a ＝ 校验_取md5 (到字节集 (内容), 真)
     按钮_加入房间_禁止 ＝ 按钮2.禁止
     返回 ()
 .如果真结束
+
+联机执行中 ＝ 真
+
 .如果真 (是否旧协议)
     .如果 (是否中文系统)
         输出文本 (“提示：该房间使用的是旧版协议，所以现在在以旧版协议模式运行，若队友都在使用最新版软件，建议用最新版软件(最低兼容选v7.7)创建房间，新协议增强了加密,延迟降低3ms,流量降低60%,更省内存,还能识别粘包(传输更可靠)！”, 真, 真)
@@ -3445,6 +3493,7 @@ MD5a ＝ 校验_取md5 (到字节集 (内容), 真)
         按钮2.禁止 ＝ 假
         按钮_加入房间_禁止 ＝ 按钮2.禁止
     .如果结束
+    联机执行中 ＝ 假
     返回 ()
 .如果真结束
 .如果真 (是否TCP传输)
@@ -3484,13 +3533,14 @@ MD5a ＝ 校验_取md5 (到字节集 (内容), 真)
             .如果结束
             .如果真 (重试次数 ＝ 已次数)
                 .如果 (是否中文系统)
-                    输出文本 (“请输入正确的房间号！重新创建房间将导致房间号变化,”, 假, 真)
+                    输出文本 (“请输入正确的房间号！重新创建房间将导致房间号变化.”, 假, 真)
                     输出文本 (“(例如你们昨天用完了今天再创建房间,房间号肯定会变)”, 假, 真)
                 .否则
                     输出文本 (“Please enter the correct number! Recreating the server will cause the number to change!”, 假, 真)
                 .如果结束
                 按钮2.禁止 ＝ 假
                 按钮_加入房间_禁止 ＝ 按钮2.禁止
+                联机执行中 ＝ 假
                 返回 ()
             .如果真结束
 
@@ -3506,10 +3556,10 @@ MD5a ＝ 校验_取md5 (到字节集 (内容), 真)
     .如果真 (是否TCP传输 ＝ 假)
         连接后禁止各种组件 ()
         .如果 (是否中文系统)
-            输出文本 (#换行符 ＋ “仅UDP不知道是否连接成功，也不会记到房间人数里，反正是已经加入房间了，建议在右下角说句话试试，能看到则为加入成功，若服务器版本低于v2.4或没有创建UDP映射，将不支持UDP连接。”)
+            输出文本 (#换行符 ＋ “仅UDP不知道是否连接成功，也不会记到房间人数里，反正是已经加入房间了，建议在右下角说句话试试，能看到则为加入成功，若房主运行的软件版本低于v2.4或没有创建UDP映射，将不支持UDP连接。”)
             标签延迟.标题 ＝ 转换编码 (“延迟：仅UDP传输暂不支持测试延迟”)
         .否则
-            输出文本 (#换行符 ＋ “Only UDP datagram transmission does not know whether the connection is successful, and will not be recorded in the number of people in the room. Anyway, it is already connected. It is recommended to try the sentence in the lower right corner. If you can see the connection is successful, if the server version is lower than v2 .4 or no UDP mapping is created, UDP connections will not be supported.”)
+            输出文本 (#换行符 ＋ “Only UDP datagram transmission does not know whether the connection is successful, and will not be recorded in the number of people in the room. Anyway, it is already connected. It is recommended to try the sentence in the lower right corner. If you can see the connection is successful, if the server version is lower than v2.4 or no UDP mapping is created, UDP connections will not be supported.”)
             标签延迟.标题 ＝ “Delay: UDP datagram does not support test delay”
         .如果结束
         启动线程 (&发送运营商, , )
@@ -5626,6 +5676,7 @@ n ＝ 取字节集长度 (字节集数据)
 .全局变量 当前是否管理员权限, 逻辑型
 .全局变量 选择框_进程断网, 逻辑型
 .全局变量 创建upnp返回IP, 文本型
+.全局变量 联机执行中, 逻辑型
 .版本 2
 .支持库 sock
 
