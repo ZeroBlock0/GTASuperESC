@@ -1,5 +1,5 @@
 ﻿更新日志：
-GTASuperESCv8.3
+GTASuperESCv8.3   2019/02/11
 新增 可设置恢复网络热键(管理员运行后双击热键框)
 
 GTASuperESCv8.2   2019/02/10
