@@ -31,4 +31,4 @@ WebSocket是使用workerman-chat聊天室，发送内容就像这样：
 新协议：  
 一键创建房间的房间号:```?昵称-密码```,普通(手动创建)房间号:```地址:端口-密码```,自动创建房间号:```#混淆并Base64编码后的普通房间号```  
   
-
+# [Introduction to English](./README_en.md)
