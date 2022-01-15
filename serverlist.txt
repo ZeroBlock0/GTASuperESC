@@ -1,3 +1,3 @@
-<txt><0>0<1>ws://0-cncu.gtxcn.com:6060/<2>CN_华北联通-WGzeyu<3>WGzeyu_CNCU<4>
-<0>0<1>ws://0-cnal.gtxcn.com:6060/<2>CN_上海多线-WGzeyu<3>WGzeyu_CNAL<4>
-<0>0<1>ws://0-hktx.gtxcn.com:6060/<2>HK_中国香港-WGzeyu<3>WGzeyu_HKAL<4></txt>
+<txt><0>0<1>ws://0-hk.wgzeyu.com:6060/<2>HK_中国香港-WGzeyu<3>WGzeyu_HKAL<4>
+<0>0<1>ws://0-cncu.gtxcn.com:6060/<2>CN_华北联通-WGzeyu<3>WGzeyu_CNCU<4>
+<0>0<1>ws://0-cnal.gtxcn.com:6060/<2>CN_上海多线-WGzeyu<3>WGzeyu_CNAL<4></txt>
