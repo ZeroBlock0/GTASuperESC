@@ -1,2 +1,2 @@
 <txt><0>3<1>ws://s.wgzeyu.com:80/ccb2g8<2>HK_中国香港@WGzeyu<3>WGzeyu_HKTX<4>
-<0>200<1>wss://gsews.wgzeyu.com:443/ccb2g8<2>CF_海外高防@WGzeyu<3>WGzeyu_CloudFlare<4></txt>
+<0>200<1>ws://gsews.wgzeyu.com:80/ccb2g8<2>CF_海外高防@WGzeyu<3>WGzeyu_CloudFlare<4></txt>
